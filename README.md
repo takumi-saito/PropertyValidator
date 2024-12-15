@@ -175,5 +175,5 @@ fun UserInputScreen() {
 
 ## ライセンス
 
-このプロジェクトは [MIT License](LICENSE) のもとで公開されています。
+このプロジェクトは [MIT License](https://github.com/takumi-saito/property-validator/blob/main/property_validator/LICENSE) のもとで公開されています。
 
