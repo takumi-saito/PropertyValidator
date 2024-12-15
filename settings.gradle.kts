@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MetadataModelUsageExample"
+rootProject.name = "PropertyValidatorUsageExample"
 include(":app")
- 
+include(":property_validator")

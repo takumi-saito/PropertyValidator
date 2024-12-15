@@ -1,4 +1,4 @@
-package t.saito.com.metadatamodelusageexample.ui.theme
+package t.saito.com.propertyvalidatorusageexample.ui.theme
 
 import android.app.Activity
 import android.os.Build

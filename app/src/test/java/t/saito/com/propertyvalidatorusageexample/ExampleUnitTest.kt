@@ -1,4 +1,4 @@
-package t.saito.com.metadatamodelusageexample
+package t.saito.com.propertyvalidatorusageexample
 
 import org.junit.Test
 

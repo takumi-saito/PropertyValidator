@@ -1,4 +1,4 @@
-package t.saito.com.metadatamodelusageexample
+package t.saito.com.propertyvalidatorusageexample
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

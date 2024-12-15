@@ -1,4 +1,4 @@
-package t.saito.com.metadatamodelusageexample.ui.theme
+package t.saito.com.propertyvalidatorusageexample.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

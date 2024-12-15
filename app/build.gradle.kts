@@ -1,10 +1,7 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.android.application)
-    // alias(libs.plugins.compose.compiler) // only Kotlin 2.0
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.kapt)
-    // alias(libs.plugins.ksp)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -44,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.2"
     }
     packaging {
         resources {
@@ -54,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.activity.compose)
 
     implementation(platform(libs.compose.bom))
@@ -64,4 +60,6 @@ dependencies {
     implementation(libs.runtime)
 
     implementation(libs.room.ktx)
+    implementation(project(":property_validator"))
+    "ksp"(project(":property_validator"))
 }
