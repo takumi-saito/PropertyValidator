@@ -1,14 +1,13 @@
 # PropertyValidator
 
-`PropertyValidator` は、Kotlin Symbol Processing (KSP) を使用してデータモデルに付与されたアノテーションを基に、バリデーションコードを自動生成するライブラリです。このライブラリを使用することで、手動でバリデーションロジックを記述する手間を削減し、コードの可読性と保守性を向上させます。
-
----
-
-## 特長
+`PropertyValidator` は、Kotlin Symbol Processing (KSP) を使用してデータモデルに付与されたアノテーションを基に、バリデーションコードを自動生成するライブラリです。
+このライブラリを使用することで、手動でバリデーションロジックを記述する手間を削減し、コードの可読性と保守性を向上させます。
 
 - **自動コード生成**: データモデルにアノテーションを付与するだけで、バリデーションコードが生成されます。
 - **軽量**: KSP に基づいているため、ビルドパフォーマンスに優れています。
-- **簡単なセットアップ**: GitHub Packagesを利用したシンプルなインストール。
+
+## [サンプルアプリ](https://github.com/takumi-saito/property-validator/tree/main/app)
+<img src="https://github.com/user-attachments/assets/86e17cd5-12f8-46d4-b685-29366c353e53" width="40%">
 
 ---
 
