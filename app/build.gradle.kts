@@ -4,12 +4,16 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 android {
-    namespace = "t.saito.com.metadatamodelusageexample"
+    namespace = "t.saito.com.propertyvalidatorusageexample"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "t.saito.com.metadatamodelusageexample"
+        applicationId = "t.saito.com.propertyvalidatorusageexample"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
@@ -60,6 +64,9 @@ dependencies {
     implementation(libs.runtime)
 
     implementation(libs.room.ktx)
-    implementation(project(":property_validator"))
-    "ksp"(project(":property_validator"))
+    implementation(libs.property.validator)
+    ksp(libs.property.validator)
+    // module dependency
+//    implementation(project(":property_validator"))
+//    "ksp"(project(":property_validator"))
 }

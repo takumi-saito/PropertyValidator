@@ -22,7 +22,7 @@ java {
 
 // local.properties の読み込み
 val localProperties = Properties().apply {
-    val file = rootProject.file("local.properties")
+    val file = rootProject.file("github.properties")
     if (file.exists()) {
         load(file.inputStream())
     }
@@ -31,7 +31,7 @@ val localProperties = Properties().apply {
 publishing {
     publications {
         create<MavenPublication>("gpr") {
-            from(components["java"])
+//            from(components["java"])
             groupId = "t.saito.com.lib" // パッケージ名
             artifactId = "property-validator" // ライブラリ名
             version = "1.0.0"
