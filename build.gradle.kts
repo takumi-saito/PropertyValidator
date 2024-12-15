@@ -10,4 +10,8 @@ plugins {
 
     // ksp
     alias(libs.plugins.ksp) apply false
+    id("maven-publish")
 }
+
+group = "t.saito.com.lib" // パッケージ名
+version = "1.0.0" // バージョン番号
