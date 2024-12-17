@@ -14,17 +14,36 @@
 ## インストール
 
 ### 1. プロジェクトにリポジトリを追加
+`github.properties` を使用して GitHub Packages の認証情報を管理する方法を推奨します。
 
-プロジェクトの `build.gradle.kts` に以下を追加します：
+プロジェクトルートにある `github.properties` に以下を追加してください：
+
+```properties
+gpr.user=<GitHubユーザ名>
+gpr.token=<GitHub Personal Access Token>
+```
+
+プロジェクトの `setting.gradle.kts` に以下を追加します：
 
 ```kotlin
-repositories {
-    maven {
-        url = uri("https://maven.pkg.github.com/<GitHubユーザ名>/<リポジトリ名>")
-        credentials {
-            username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
-            password = project.findProperty("gpr.token") as String? ?: System.getenv("GITHUB_TOKEN")
+dependencyResolutionManagement {
+    ...
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/takumi-saito/property-validator")
+            val props = loadProperties(file("$rootDir/github.properties"))
+            credentials {
+                username = props["gpr.user"] as String
+                password = props["gpr.token"] as String
+            }
         }
+    }
+}
+
+fun loadProperties(propertiesFile: File) = java.util.Properties().apply {
+    propertiesFile.inputStream().use { fis ->
+        load(fis)
     }
 }
 ```
@@ -33,7 +52,7 @@ repositories {
 
 ### 2. 依存関係を追加
 
-`build.gradle.kts` に以下を追加してください：
+app/`build.gradle.kts` に以下を追加してください：
 
 ```kotlin
 plugins {
@@ -48,52 +67,20 @@ dependencies {
 
 ---
 
-### 3. ローカルでの認証情報管理（推奨）
-
-`local.properties` を使用して GitHub Packages の認証情報を管理する方法を推奨します。
-
-1. プロジェクトルートにある `local.properties` に以下を追加してください：
-
-```properties
-gpr.user=<GitHubユーザ名>
-gpr.token=<GitHub Personal Access Token>
-```
-
-2. `build.gradle.kts` 内で認証情報を参照します：
-
-```kotlin
-val localProperties = Properties().apply {
-    val file = rootProject.file("local.properties")
-    if (file.exists()) {
-        load(file.inputStream())
-    }
-}
-
-repositories {
-    maven {
-        url = uri("https://maven.pkg.github.com/<GitHubユーザ名>/<リポジトリ名>")
-        credentials {
-            username = localProperties.getProperty("gpr.user")
-            password = localProperties.getProperty("gpr.token")
-        }
-    }
-}
-```
-
 ---
 
 ## 使い方
 
 ### 1. データモデルにアノテーションを付与する
 
-以下のように、`@MetadataModel` をクラスに、`@Metadata` を各プロパティに付与します。
+以下のように、`@PropertyValidateModel` をクラスに、`@PropertyValidate` を各プロパティに付与します。
 
 ```kotlin
-@MetadataModel
+@PropertyValidateModel
 data class User(
-    @Metadata(length = 10, required = true) // 名前は必須で最大10文字
+    @PropertyValidate(length = 10, required = true) // 名前は必須で最大10文字
     val name: String = "",
-    @Metadata(length = 5) // ニックネームは最大5文字
+    @PropertyValidate(length = 5) // ニックネームは最大5文字
     val nickname: String = ""
 )
 ```
@@ -169,7 +156,7 @@ fun UserInputScreen() {
 ## 注意事項
 
 - **KSPの設定が正しく行われていることを確認してください**。
-- **`local.properties` の `gpr.user` と `gpr.token` が正しく設定されている必要があります**。
+- **`github.properties` の `gpr.user` と `gpr.token` が正しく設定されている必要があります**。
 
 ---
 
